@@ -1,45 +1,24 @@
-import { useState } from 'react'
-import logo from './logo.svg'
-import './App.css'
+import { Canvas } from "@react-three/fiber";
+import { Suspense } from "react";
+import "./App.css";
+import Logo2D from "./components/Logo2D";
+import GorgeousMarquee from "./components/GorgeousMarquee";
+import { useTapTempoBPM } from "./hooks";
+import Stage from "./Stage";
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  useTapTempoBPM();
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.jsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
+      <Canvas>
+        <Suspense fallback={null}>
+          <Stage />
+        </Suspense>
+      </Canvas>
+      {false && <Logo2D />}
+      {true && <GorgeousMarquee>こんにちは</GorgeousMarquee>}
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

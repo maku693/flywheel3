@@ -1,0 +1,24 @@
+.GorgeousMarquee {
+  display: flex;
+  height: 200vh;
+  width: 200vw;
+  position: absolute;
+  top: 0vh;
+  left: 0;
+  font-size: 100vh;
+  font-style: italic;
+  font-weight: 900;
+  line-height: 100vh;
+  white-space: nowrap;
+  background: black;
+  color: white;
+  pointer-events: none;
+  opacity: 1;
+  mix-blend-mode: lighten;
+}
+
+.GorgeousMarquee__Content {
+  animation: spin 5s linear 0s infinite normal both;
+  padding: 0 50vh;
+  box-sizing: border-box;
+}
