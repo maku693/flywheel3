@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: "Helvetica Neue", sans-serif;
+  font-family: "Helvetica Neue", "Hiragino Sans", sans-serif;
   background: black;
   cursor: crosshair;
 }
@@ -17,5 +17,14 @@ body {
   }
   100% {
     transform: translateX(-100%);
+  }
+}
+
+@keyframes zoom {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(10);
   }
 }

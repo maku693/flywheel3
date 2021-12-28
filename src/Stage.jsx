@@ -34,8 +34,8 @@ export default function Stage() {
       <PerspectiveCamera makeDefault position={[0, 5, 10]} />
       {true && (
         <CameraShake
-          maxYaw={0.05}
-          maxPitch={0.05}
+          maxYaw={0.1}
+          maxPitch={0.1}
           maxRoll={0.05}
           yawFrequency={0.2}
           pitchFrequency={0.2}
@@ -47,45 +47,21 @@ export default function Stage() {
       <Environment preset="sunset" />
       <ambientLight />
       {[0, 1, 2, 3].includes(beat) && (
-        <BeatRotate speed={[-0.05, -0.1, -0.15]}>
+        <BeatRotate speed={[0.2, -0.1, 0.1]}>
           <BeatScale offset={[0.1, 0.1, 0.1]} power={10}>
-            <Box scale={1} position={[0, 5, 1]}>
+            <Box position={[0, 2, 1]}>
               <meshStandardMaterial
                 attach="material"
-                color="cyan"
+                color="green"
                 roughness={0}
                 metalness={1}
                 flatShading
               />
             </Box>
-            <Box scale={1} position={[0, -5, -1]}>
+            <Sphere position={[0, -5, -1]}>
               <meshStandardMaterial
                 attach="material"
-                color="red"
-                roughness={0}
-                metalness={1}
-                flatShading
-              />
-            </Box>
-          </BeatScale>
-        </BeatRotate>
-      )}
-      {[0, 1, 2, 3].includes(beat) && (
-        <BeatRotate speed={[0.15, 0.05, 0.05]}>
-          <BeatScale offset={[0.1, 0.1, 0.1]} power={10}>
-            <Sphere scale={1} position={[5, 1, 0]}>
-              <meshStandardMaterial
-                attach="material"
-                color="red"
-                roughness={0}
-                metalness={1}
-                flatShading
-              />
-            </Sphere>
-            <Sphere scale={1} position={[-5, -1, 0]}>
-              <meshStandardMaterial
-                attach="material"
-                color="cyan"
+                color="green"
                 roughness={0}
                 metalness={1}
                 flatShading
@@ -94,30 +70,67 @@ export default function Stage() {
           </BeatScale>
         </BeatRotate>
       )}
+      {true &&
+        [0, 1, 2, 3].includes(beat) &&
+        [...Array(10).keys()]
+          .map((x, _, { length }) => x - length / 2 + 0.5)
+          .map((i) => (
+            <BeatRotate speed={[0.2, -0.01, 0.05]}>
+              <BeatScale offset={[0.1, 0.1, 0.1]} power={10}>
+                <group position={[(i % 2) * 3, (i % 5) * 4, (i % 3) * 4]}>
+                  <Octahedron position={[5, 1, 0]}>
+                    <meshStandardMaterial
+                      attach="material"
+                      color="red"
+                      roughness={0}
+                      metalness={1}
+                      flatShading
+                    />
+                  </Octahedron>
+                  <Octahedron position={[-5, -1, 0]}>
+                    <meshStandardMaterial
+                      attach="material"
+                      color="cyan"
+                      roughness={0}
+                      metalness={1}
+                      flatShading
+                    />
+                  </Octahedron>
+                </group>
+              </BeatScale>
+            </BeatRotate>
+          ))}
       {true && (
-        // <BeatRotate speed={[0.05, -0.05, 0.1]}>
-        //   <BeatScale offset={[0.1, 0.1, 0.1]} power={10}>
-        <group>
-          {[0, 1, 2, 3].includes(beat) &&
-            [...Array(10).keys()].map((i) => (
-              <Octahedron key={i} scale={1.5} position={[i % 2, 0, 0]}>
-                <meshStandardMaterial
-                  attach="material"
-                  color="greenyellow"
-                  roughness={0}
-                  metalness={1}
-                  flatShading
-                />
-              </Octahedron>
-            ))}
-        </group>
-        //   </BeatScale>
-        // </BeatRotate>
+        <BeatRotate speed={[0.05, 0.1, -0.02]}>
+          <BeatScale offset={[0.1, 0.1, 0.1]} power={100}>
+            {[0, 1, 2, 3].includes(beat) &&
+              [...Array(30).keys()]
+                .map((x, _, { length }) => x - length / 2 + 0.5)
+                .map((i) => (
+                  <group
+                    key={i}
+                    position={[(i % 5) * 5, (i % 4) * 6, (i % 3) * 4]}
+                  >
+                    <BeatRotate speed={[0.05 * (i % 3), -0.02, 0.01]}>
+                      <Masawada>
+                        <meshStandardMaterial
+                          attach="material"
+                          color="greenyellow"
+                          roughness={0}
+                          metalness={1}
+                          flatShading
+                        />
+                      </Masawada>
+                    </BeatRotate>
+                  </group>
+                ))}
+          </BeatScale>
+        </BeatRotate>
       )}
-      {true && (
-        // <BeatRotate speed={[0.015, 0.015, 0.025]}>
-        <Stars color="white" count={500} size={200} />
-        // </BeatRotate>
+      {false && (
+        <BeatRotate speed={[0.01, 0.005, 0]}>
+          <Stars color="white" count={500} size={200} />
+        </BeatRotate>
       )}
       <EffectComposer>
         {false && (
@@ -129,8 +142,8 @@ export default function Stage() {
             ratio={0.5}
           />
         )}
-        {false && <ChromaticAberration offset={[0.05, 0]} />}
-        {true && <Bloom luminanceThreshold={0.75} />}
+        {false && <ChromaticAberration offset={[0.02, 0]} />}
+        {false && <Bloom luminanceThreshold={0.5} />}
       </EffectComposer>
     </>
   );

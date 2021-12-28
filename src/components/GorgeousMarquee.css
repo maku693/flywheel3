@@ -6,19 +6,19 @@
   top: 0vh;
   left: 0;
   font-size: 100vh;
-  font-style: italic;
-  font-weight: 900;
+  font-style: normal;
+  font-weight: 100;
   line-height: 100vh;
   white-space: nowrap;
   background: black;
-  color: white;
+  color: rgb(122, 255, 193);
   pointer-events: none;
   opacity: 1;
-  mix-blend-mode: lighten;
+  mix-blend-mode: exclusion;
 }
 
 .GorgeousMarquee__Content {
-  animation: spin 5s linear 0s infinite normal both;
+  animation: spin 10s linear 2s infinite normal both;
   padding: 0 50vh;
   box-sizing: border-box;
 }
